@@ -15,19 +15,19 @@ See the Tutorial for more information
 
 //Constructor==============================================================================================
 //Connection :
-//    4 PinA--------+-----------+----------+-----Bus A        
+//    4 PinA--------+-----------+----------+-----Bus A
 //    5 PinB----+---|-------+---|------+---|-----Bus B
 //    7 --------|---|-------|---|------|-+ |
 //    8 --------|---|-------|-+ |      | | |
 //    9 --------|-+ |       | | |      | | |
-//              ¤ | ¤       ¤ | ¤      ¤ | ¤                  ¤ : 1N4148 diodes, Cathode towards the encoder
+//              ï¿½ | ï¿½       ï¿½ | ï¿½      ï¿½ | ï¿½                  ï¿½ : 1N4148 diodes, Cathode towards the encoder
 //              O O O       O O O      O O O
 //                |           |          |
 //              +-+         +-+        +-+
 //              |           |          |
 //              O   O       O   O      O   O
-//                  ¤           ¤          ¤
-//                  |           |          | 
+//                  ï¿½           ï¿½          ï¿½
+//                  |           |          |
 //    6 PinS--------+-----------+----------+-----Bus S
 //
 //All the encoder's common pins (7, 8 and 9) are in OUTPUT mode and are set to HIGH
@@ -62,7 +62,7 @@ CommonBusEncoders::CommonBusEncoders(int pinA, int pinB, int pinS, int count) {
 //indexE    : The index returned when the encoder is in it's first mode and is turned clockwise
 //indexS    : the index of the switch (0 if the encoder is multi mode, any index otherwise)
 //------------------------------------------------------------------------------------------------------------
-void CommonBusEncoders::addEncoder(int encoderId, int type, int pin, int modes, int indexE, int indexS) {   
+void CommonBusEncoders::addEncoder(int encoderId, int type, int pin, int modes, int indexE, int indexS) {
   encoders[encoderId].type = type;
   encoders[encoderId].pin = pin;
   encoders[encoderId].modes = modes;
@@ -94,12 +94,12 @@ int CommonBusEncoders::debounce(int pin) {
 
 //readEncoder4============================================================================================
 // Single encoders (4 steps per detent) (When the encoder goes click and stays there)
-//  Detent is when both A and B are high in INPUT_PULLUP mode 
+//  Detent is when both A and B are high in INPUT_PULLUP mode
 //  Step :   1 2 3 4 5 6 7 8
 //      A:   1 0 0 1 1 0 0 1
 //      B:   0 0 1 1 0 0 1 1
-// CW  (Read left to right) When A Rises (4 and 8), B is high 
-// CCW (Read right to left) When A Rises (1 and 5), B is low 
+// CW  (Read left to right) When A Rises (4 and 8), B is high
+// CCW (Read right to left) When A Rises (1 and 5), B is low
 //--------------------------------------------------------------------------------------------------------
 int CommonBusEncoders::readEncoder4(int i) {
   int rotation = 0;                                   //Direction of rotation buffer (defaults to not turned)
@@ -196,10 +196,10 @@ int CommonBusEncoders::getIndex(int i) {
 
 //readAll========================================================================================================
 //Reads all the encoders
-//Using an encoder raises a flag to give 
+//Using an encoder raises a flag to give
 //The priority is canceled after an inactivity is observed beyond "MYactiveTimeLimit" (1/2 second by default)
 //If the current encoder is still active, return it's index or return 0
-//If not, read all the encoders 
+//If not, read all the encoders
 //----------------------------------------------------------------------------------------------------------------
 int CommonBusEncoders::readAll() {
   static int currentEncoder = 0;                                  //To concentrate on the current encoder
@@ -242,7 +242,7 @@ void CommonBusEncoders::resetChronoAfter(int aDelay) {
 //It defaults to 16 times. Allowable values are 1..32
 //--------------------------------------------------------------------------------
 void CommonBusEncoders::setDebounce(int w) {
-  debounceWidth = w;
+  int debounceWidth = w;
 	unsigned long debounceDontCare = 0xffffffff;
 	for (int i = 0; i < w; i++) debounceDontCare = debounceDontCare << 1 | 0;
 }//setDebounce--------------------------------------------------------------------
